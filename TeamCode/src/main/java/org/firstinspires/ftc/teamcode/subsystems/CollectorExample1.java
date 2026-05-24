@@ -19,5 +19,5 @@ setIntakeState(IntakeState intakeState) - sets the intake state of the collector
 Challenge: only call motor.setPower when the collector power changes to improve loop times by reducing hardware calls
  */
 
-public class Collector {
+public class CollectorExample1 {
 }

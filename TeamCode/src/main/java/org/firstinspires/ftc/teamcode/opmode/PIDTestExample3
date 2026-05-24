@@ -1,0 +1,7 @@
+
+Requirements
+- needs to appear on FTC dashboard (@Config needed above public class PIDTestOpModeExample2 for this class to appear on FTC dashboard)
+- extends LinearOpMode
+- can control kP, kI, kD, and setpoint of PID on FTC dashboard (variables need to have public static in front of it to appear on FTC dashboard)
+- uses PIDController imported from FTCLib to calculate motor power
+- telemetry outputs motor power, motor position, and PID setpoint
