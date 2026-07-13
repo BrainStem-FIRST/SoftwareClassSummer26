@@ -1,4 +1,4 @@
 package org.firstinspires.ftc.teamcode.subsystems.turret;
 
-public class Empty {
+public class TurretEmpty {
 }

@@ -11,9 +11,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @Config
-@TeleOp(name="localization test")
+@TeleOp(name="Localization Test")
 public class LocalizationTest extends LinearOpMode {
-    public static double startX = -63.5, startY = 39.5, startA = 0;
+    public static double startX = 0, startY = 0, startA = 0;
     @Override
     public void runOpMode() {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());

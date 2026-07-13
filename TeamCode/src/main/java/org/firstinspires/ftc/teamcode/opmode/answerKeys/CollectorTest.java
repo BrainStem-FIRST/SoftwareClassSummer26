@@ -1,19 +1,19 @@
 package org.firstinspires.ftc.teamcode.opmode.answerKeys;
 
 import com.acmerobotics.dashboard.FtcDashboard;
-import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystems.collector.CollectorChallengeAnswerKey;
 
-@Config
-@TeleOp(name="Collector Test", group="Answer Key")
+@Disabled
+//@TeleOp(name="Collector Test", group="Answer Key")
 public class CollectorTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        telemetry = new MultipleTelemetry(FtcDashboard.getInstance().getTelemetry(), telemetry);
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         telemetry.setMsTransmissionInterval(30);
 
         CollectorChallengeAnswerKey collector = new CollectorChallengeAnswerKey(hardwareMap);
@@ -23,7 +23,7 @@ public class CollectorTest extends LinearOpMode {
             if(gamepad1.right_trigger > .1)
                 collector.setIntakeState(CollectorChallengeAnswerKey.IntakeState.INTAKE);
             else if(gamepad1.left_trigger > .1)
-                collector.setIntakeState(CollectorChallengeAnswerKey.IntakeState.EXTAKE);
+                collector.setIntakeState(CollectorChallengeAnswerKey.IntakeState.OUTTAKE);
             else
                 collector.setIntakeState(CollectorChallengeAnswerKey.IntakeState.OFF);
 

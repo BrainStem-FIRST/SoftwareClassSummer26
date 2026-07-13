@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
-public class AnswerKey {
+public class TurretAnswerKey {
 
     // you will tune and fine these values on day 2
     public static double radiansPerEncoder = 0;
@@ -30,7 +30,7 @@ public class AnswerKey {
     }
     private TurretState turretState;
 
-    public AnswerKey(HardwareMap hardwareMap) {
+    public TurretAnswerKey(HardwareMap hardwareMap) {
         turretMotor = hardwareMap.get(DcMotorEx.class, "turret");
         pid = new PIDController(kP, kI, kD);
         setTurretState(TurretState.OFF);
@@ -41,6 +41,9 @@ public class AnswerKey {
         // updating turret angle
         int turretEncoder = turretMotor.getCurrentPosition();
         currentAngle = turretEncoder * radiansPerEncoder;
+
+        // updating pid values from dashboard (optional)
+        pid.setPID(kP, kI, kD);
 
         switch(turretState) {
             case OFF:
@@ -55,8 +58,10 @@ public class AnswerKey {
             case SWING_PAST_ANGLE:
                 if(Math.signum(targetAngle - currentAngle) == targetDirection)
                     turretMotor.setPower(bangbangPower * targetDirection);
-                else
+                else {
                     turretMotor.setPower(0);
+                    setTurretState(TurretState.OFF);
+                }
                 break;
         }
     }

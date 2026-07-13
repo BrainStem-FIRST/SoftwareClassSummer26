@@ -14,8 +14,8 @@ import java.util.Objects;
 
 public final class PinpointLocalizer implements Localizer {
     public static class Params {
-        public double parYTicks = 0; // y position of the parallel encoder (in inches)
-        public double perpXTicks = 0; // x position of the perpendicular encoder (in inches)
+        public double parYInches = 0; // y position of the parallel encoder (in inches)
+        public double perpXInches = 0; // x position of the perpendicular encoder (in inches)
     }
 
     public static Params PARAMS = new Params();
@@ -32,8 +32,8 @@ public final class PinpointLocalizer implements Localizer {
 
         driver.setEncoderResolution(20, DistanceUnit.MM);
         driver.setOffsets(
-                DistanceUnit.MM.fromInches(PARAMS.parYTicks),
-                DistanceUnit.MM.fromInches(PARAMS.perpXTicks),
+                DistanceUnit.MM.fromInches(PARAMS.parYInches),
+                DistanceUnit.MM.fromInches(PARAMS.perpXInches),
                 DistanceUnit.MM
         );
 

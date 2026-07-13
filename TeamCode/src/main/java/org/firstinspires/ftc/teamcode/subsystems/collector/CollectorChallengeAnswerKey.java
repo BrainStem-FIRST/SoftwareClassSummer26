@@ -9,11 +9,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Config
 public class CollectorChallengeAnswerKey {
     public static double intakePower = .9;
-    public static double extakePower = -.7;
+    public static double outtakePower = -.7;
     private final DcMotorEx intakeMotor;
 
     public enum IntakeState {
-        OFF, INTAKE, EXTAKE
+        OFF, INTAKE, OUTTAKE
     }
     private IntakeState intakeState;
 
@@ -48,8 +48,8 @@ public class CollectorChallengeAnswerKey {
             case INTAKE:
                 intakeMotor.setPower(intakePower);
                 break;
-            case EXTAKE:
-                intakeMotor.setPower(extakePower);
+            case OUTTAKE:
+                intakeMotor.setPower(outtakePower);
                 break;
         }
     }

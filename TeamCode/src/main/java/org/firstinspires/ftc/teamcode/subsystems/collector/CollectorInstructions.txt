@@ -1,5 +1,5 @@
 Class Requirements
-an enum called IntakeState with the states OFF, INTAKE, and EXTAKE
+an enum called IntakeState with the states OFF, INTAKE, and OUTTAKE
 instance data holding the motor, called intakeMotor (variable type is DcMotorEx)
 instance data of the IntakeState enum
 
@@ -9,7 +9,7 @@ a constructor taking in HardwareMap and instantiating all instance data above
 
 an update function
 - has an enum switch statement that sets motor power depending on which state the collector is in
-- create static intakePower and extakePower variables; use these variables in the switch statement
+- create static intakePower and outtakePower variables; use these variables in the switch statement
 
 a printTelemetry function
 - takes in Telemetry as parameter and prints valuable info to telemetry

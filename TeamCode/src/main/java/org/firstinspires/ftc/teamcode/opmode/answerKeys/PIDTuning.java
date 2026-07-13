@@ -17,7 +17,7 @@ public class PIDTuning extends LinearOpMode {
     public static double radiansPerEncoder = 0;
     @Override
     public void runOpMode() throws InterruptedException {
-        telemetry = new MultipleTelemetry(FtcDashboard.getInstance().getTelemetry(), telemetry);
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         telemetry.setMsTransmissionInterval(30);
 
         PIDController pid = new PIDController(kP, kI, kD);
@@ -32,7 +32,7 @@ public class PIDTuning extends LinearOpMode {
 
         while(opModeIsActive()) {
             int turretEncoder = turret.getCurrentPosition();
-
+            pid.setPID(kP, kI, kD);
             pid.setSetPoint(setPoint);
             double power = pid.calculate(turretEncoder);
             turret.setPower(power);
