@@ -14,6 +14,7 @@ public class LiftChallengeAnswerKey {
     // when first coding subsystems, you can leave these tuning values 0
     // (just remember that you have to tune them later on)
     public static double kP = 0, kI = 0, kD = 0;
+    public static double kS = 0;
     public static double[] kGLookupInput = new double[] { 0, 50, 100, 150, 200 };
     public static double[] kGLookupOutput = new double[] { .3, .4, .3, .2, .1 };
      private final DcMotorEx liftMotor;
@@ -42,9 +43,10 @@ public class LiftChallengeAnswerKey {
 
         /// NOTE: I am assuming that positive motor power = upwards motion
         double lookupInput = Range.clip(curPos, kGLookupInput[0], kGLookupInput[kGLookupInput.length - 1]);
-        double feedforward = kGLookup.get(lookupInput);
+        double gravityFeedforward = kGLookup.get(lookupInput);
+        double frictionFeedforward = Math.signum(targetPos - curPos) * kS;
         double pidPower = pid.calculate(curPos, targetPos);
-        double totalPower = Range.clip(feedforward + pidPower, -1, 1); // you don't have to clip this
+        double totalPower = Range.clip(gravityFeedforward + frictionFeedforward + pidPower, -1, 1); // you don't have to clip this
         liftMotor.setPower(totalPower);
 
 

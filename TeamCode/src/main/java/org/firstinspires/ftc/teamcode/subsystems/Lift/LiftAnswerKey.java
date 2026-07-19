@@ -13,7 +13,7 @@ public class LiftAnswerKey {
     // when first coding subsystems, you can leave these tuning values 0
     // (just remember that you have to tune them later on)
     public static double kP = 0, kI = 0, kD = 0;
-    public static double kG = 0;
+    public static double kG = 0, kS = 0;
 
     private final DcMotorEx liftMotor;
     private final PIDController pid;
@@ -33,8 +33,9 @@ public class LiftAnswerKey {
         pid.setPID(kP, kI, kD);
 
         /// NOTE: I am assuming that positive motor power = upwards motion
+        double frictionFeedforward = Math.signum(targetPos - curPos) * kS;
         double pidPower = pid.calculate(curPos, targetPos);
-        double totalPower = Range.clip(kG + pidPower, -1, 1); // you don't need to clip this
+        double totalPower = Range.clip(kG + frictionFeedforward + pidPower, -1, 1); // you don't need to clip this
         liftMotor.setPower(totalPower);
 
 

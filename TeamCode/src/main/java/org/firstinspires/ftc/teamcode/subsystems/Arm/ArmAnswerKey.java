@@ -12,7 +12,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class ArmAnswerKey {
     // when first coding subsystems, you can leave these tuning values 0
     // (just remember that you have to tune them later on)
-    public static double kG = 0;
+    public static double kG = 0, kS = 0;
     public static double kP = 0, kI = 0, kD = 0;
     public static double radiansPerEncoder = 0;
 
@@ -35,11 +35,12 @@ public class ArmAnswerKey {
 
         pid.setPID(kP, kI, kD);
 
-        double feedforward = kG * Math.cos(currentAngle);
+        double gravityFeedforward = kG * Math.cos(currentAngle);
+        double frictionFeedforward = kS * Math.signum(targetAngle - currentAngle);
 
         double pidPower = pid.calculate(currentAngle, targetAngle);
 
-        double total = Range.clip(feedforward + pidPower, -1, 1);
+        double total = Range.clip(gravityFeedforward + frictionFeedforward + pidPower, -1, 1);
         armMotor.setPower(total);
 
         telemetry.addLine("ARM-----");
