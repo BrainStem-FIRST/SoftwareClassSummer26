@@ -44,8 +44,7 @@ public class LiftChallengeAnswerKey {
         double lookupInput = Range.clip(curPos, kGLookupInput[0], kGLookupInput[kGLookupInput.length - 1]);
         double feedforward = kGLookup.get(lookupInput);
         double pidPower = pid.calculate(curPos, targetPos);
-        pidPower = Range.clip(pidPower, -1, 1);
-        double totalPower = Range.clip(feedforward + pidPower, -1, 1);
+        double totalPower = Range.clip(feedforward + pidPower, -1, 1); // you don't have to clip this
         liftMotor.setPower(totalPower);
 
 

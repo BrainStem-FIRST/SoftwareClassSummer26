@@ -34,8 +34,7 @@ public class LiftAnswerKey {
 
         /// NOTE: I am assuming that positive motor power = upwards motion
         double pidPower = pid.calculate(curPos, targetPos);
-        pidPower = Range.clip(pidPower, -1, 1);
-        double totalPower = Range.clip(kG + pidPower, -1, 1);
+        double totalPower = Range.clip(kG + pidPower, -1, 1); // you don't need to clip this
         liftMotor.setPower(totalPower);
 
 

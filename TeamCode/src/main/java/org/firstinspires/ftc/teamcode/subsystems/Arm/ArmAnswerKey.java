@@ -36,10 +36,8 @@ public class ArmAnswerKey {
         pid.setPID(kP, kI, kD);
 
         double feedforward = kG * Math.cos(currentAngle);
-        feedforward = Range.clip(feedforward, -1, 1);
 
         double pidPower = pid.calculate(currentAngle, targetAngle);
-        pidPower = Range.clip(pidPower, -1, 1);
 
         double total = Range.clip(feedforward + pidPower, -1, 1);
         armMotor.setPower(total);
