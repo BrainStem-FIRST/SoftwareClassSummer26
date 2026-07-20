@@ -3,6 +3,11 @@ Class Requirements
 The Arm class SHOULD HAVE ZERO STATES
 THERE SHOULD BE NO STATE MACHINE IN ARM
 
+Control System Requirements:
+- Need gravity feedforward model; don't forget that the effect of gravity changes based on the arm's current angle
+- Need friction feedforward model; don't forget that frictional forces are always applied opposite to your direction of motion
+- Need PID feedback
+
 Static variables:
 ????
 I won't say because it depends on the control system you design
