@@ -32,7 +32,8 @@ public class ShooterAnswerKey {
         setShooterState(ShooterState.OFF);
     }
 
-    public void update() {
+
+    public void update(double batteryVoltage) {
         double currentVelocity = shooterMotor.getVelocity();
         pid.setPID(kP, kI, kD);
 
@@ -44,7 +45,8 @@ public class ShooterAnswerKey {
                 shooterMotor.setPower(targetPower);
                 break;
             case VELOCITY_CONTROL:
-                shooterMotor.setPower(calculatePower(currentVelocity, targetVelocity));
+                double voltage = calculateVoltage(currentVelocity, targetVelocity);
+                shooterMotor.setPower(voltage / batteryVoltage);
                 break;
         }
 
@@ -55,14 +57,12 @@ public class ShooterAnswerKey {
         telemetry.addData("S motor power", shooterMotor.getPower());
     }
 
-    private double calculatePower(double currentVelocity, double targetVelocity) {
-        double feedforward = targetVelocity * kV + Math.signum(targetVelocity) * kS;
-        feedforward = Range.clip(feedforward, -1, 1);
+    private double calculateVoltage(double currentVelocity, double targetVelocity) {
+        double feedforwardVoltage = targetVelocity * kV + Math.signum(targetVelocity) * kS;
 
-        double pidPower = pid.calculate(currentVelocity, targetVelocity);
-        pidPower = Range.clip(pidPower, -1, 1);
+        double pidVoltage = pid.calculate(currentVelocity, targetVelocity);
 
-        return Range.clip(feedforward + pidPower, -1, 1);
+        return feedforwardVoltage + pidVoltage;
     }
 
     public void setShooterState(ShooterState shooterState) {
