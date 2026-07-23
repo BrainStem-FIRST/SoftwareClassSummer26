@@ -7,10 +7,13 @@ Parts 1 & 2: Lift and Arm
   - Arm: subsystems/day3Arm/ArmInstructionsDay3.txt
   - Lift: subsystems/day3Lift/LiftInstructionsDay3.txt
 
+
+
 Part 3: Day3BrainSTEMRobot
-Create a Day3BrainSTEMRobot class (see Day3BrainSTEMRobotAnswerKey.java for the answer key) that ties
+Create a Day3BrainSTEMRobot class that ties
 your Arm, Lift, and a pre-existing drivetrain class together into one robot object, and handles battery
 voltage for you so the individual subsystems don't have to know about it.
+See Day3BrainSTEMRobotAnswerKey.java for the answer key
 
 Class Requirements:
 Instance data:
@@ -35,4 +38,24 @@ It should have an update function (takes 0 parameters)
 - update your drive's localizer (drive.pinpoint().update())
 - call lift.update() and arm.update()
 
-GOOD VARIABLE NAMES ARE IMPORTANT
+
+
+Part 4: CommandsList
+Create a CommandsList class. This class will hold public static methods that all return InstantCommands.
+You will be writing InstantCommands that set subsystem states/target positions (the simplest type of commands).
+Each method takes in the subsystem it needs (plus any other arguments it needs) as parameters, and returns a new InstantCommand whose body calls the appropriate
+setter(s) on that subsystem.
+
+The list of functions you have to write is:
+- collectorIntake - sets the Collector's intake state to INTAKE
+- collectorOff - sets the Collector's intake state to OFF
+- turretToCenter - sets the Turret's state to POINT_AT_ANGLE and its target angle to 0
+- liftToTargetPosition - sets the Lift's target position to the position argument
+- armToTargetAngle - sets the Arm's target angle to the angleRad argument
+- armTo90Degrees - sets the Arm's target angle to 90 degrees (converted to radians)
+
+See Day3CommandsListAnswerKey.java for the answer key
+
+
+When you are done: push your code to github and ensure that your repository visibility is set
+to Public. Then, text us so we can review it.
