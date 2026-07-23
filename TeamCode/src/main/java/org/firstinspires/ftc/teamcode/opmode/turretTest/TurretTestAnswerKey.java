@@ -6,7 +6,7 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.subsystems.turret.TurretAnswerKey;
+import org.firstinspires.ftc.teamcode.subsystems.day1Turret.TurretAnswerKey;
 
 @Config
 @Disabled // makes it so this doesn't show up in the driver station opMode dropdown

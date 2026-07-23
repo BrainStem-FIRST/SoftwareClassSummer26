@@ -1,0 +1,35 @@
+Class Requirements
+
+Add onto your Arm class from Day 2
+
+New Feature: Battery Independence
+- As the battery drains over a match, its voltage drops, which means the same motor power
+  produces less actual voltage/force than it did on a fresh battery
+- Instead of directly setting motor power from your feedforward + PID output, calculate the
+  TOTAL VOLTAGE you want to apply (gravity feedforward + friction feedforward + PID output),
+  then divide by the current battery voltage to get the motor power
+- power = totalVoltage / batteryVoltage
+- This keeps your arm's behavior consistent no matter how drained the battery is
+
+Add a setBatteryVoltage function
+  - takes in 1 argument (double batteryVoltage)
+  - sets battery voltage instance data to argument
+
+New Feature: Deadband
+- Right near the target angle, small amounts of friction feedforward/PID output can cause the
+  arm to jitter back and forth instead of settling
+- A deadband zeroes out that output once the arm is very close to its target, so it settles
+  smoothly instead of oscillating
+
+Add a deadbandRadians variable on FTC dashboard representing how close (in radians) the arm
+needs to be to its target angle before the deadband kicks in
+In your update function
+  - calculate the angle error
+  - if the absolute value of the angle error is less than deadbandRadians, zero out your
+    friction feedforward AND your PID output
+  - IMPORTANT: the deadband is NOT applied to everything. Do NOT zero out gravity feedforward -
+    the arm still needs to fight gravity even while sitting still at its target angle. Only
+    friction feedforward and PID output (which should go to 0 once you're settled anyway) get
+    zeroed out
+
+ArmAnswerKeyDay3 is the answer key.

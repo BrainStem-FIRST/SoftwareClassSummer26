@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.subsystems.collector;
+package org.firstinspires.ftc.teamcode.subsystems.day1Collector;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
-public class CollectorChallengeAnswerKey {
+public class CollectorBasicAnswerKey {
     public static double intakePower = .9;
     public static double outtakePower = -.7;
     private final DcMotorEx intakeMotor;
@@ -18,7 +18,7 @@ public class CollectorChallengeAnswerKey {
     }
     private IntakeState intakeState;
 
-    public CollectorChallengeAnswerKey(HardwareMap hardwareMap, Telemetry telemetry) {
+    public CollectorBasicAnswerKey(HardwareMap hardwareMap, Telemetry telemetry) {
         // note: there's no need to store hardwareMap as instance data
         this.telemetry = telemetry;
 
@@ -27,20 +27,6 @@ public class CollectorChallengeAnswerKey {
     }
 
     public void update() {
-        telemetry.addLine("---COLLECTOR---");
-        telemetry.addData("C state", intakeState);
-        telemetry.addData("C power", intakeMotor.getPower());
-        // YOU SHOULD NOT HAVE A "telemetry.update();" HERE
-    }
-
-    public IntakeState getIntakeState() {
-        return intakeState;
-    }
-    public void setIntakeState(IntakeState intakeState) {
-        if(this.intakeState == intakeState)
-            return;
-
-        this.intakeState = intakeState;
         switch(intakeState) {
             case OFF:
                 intakeMotor.setPower(0);
@@ -52,5 +38,19 @@ public class CollectorChallengeAnswerKey {
                 intakeMotor.setPower(outtakePower);
                 break;
         }
+
+        // note: FTC Dashboard displays telemetry alphabetically, so if you want your collector telemetry to group together keep that in mind
+        // you don't need to copy this format, but you should find some way to keep your telemetry organized
+        telemetry.addLine("---COLLECTOR---");
+        telemetry.addData("C state", intakeState);
+        telemetry.addData("C power", intakeMotor.getPower());
+        // YOU SHOULD NOT HAVE A "telemetry.update();" HERE
+    }
+
+    public IntakeState getIntakeState() {
+        return intakeState;
+    }
+    public void setIntakeState(IntakeState intakeState) {
+        this.intakeState = intakeState;
     }
 }

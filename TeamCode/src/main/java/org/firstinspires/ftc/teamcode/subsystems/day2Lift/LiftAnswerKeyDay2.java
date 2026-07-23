@@ -1,59 +1,58 @@
-package org.firstinspires.ftc.teamcode.subsystems.Lift;
+package org.firstinspires.ftc.teamcode.subsystems.day2Lift;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.controller.PIDController;
-import com.arcrobotics.ftclib.util.InterpLUT;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
-public class LiftChallengeAnswerKey {
+public class LiftAnswerKeyDay2 {
     // when first coding subsystems, you can leave these tuning values 0
     // (just remember that you have to tune them later on)
     public static double kP = 0, kI = 0, kD = 0;
-    public static double kS = 0;
-    public static double[] kGLookupInput = new double[] { 0, 50, 100, 150, 200 };
-    public static double[] kGLookupOutput = new double[] { .3, .4, .3, .2, .1 };
-     private final DcMotorEx liftMotor;
+    public static double kG = 0, kS = 0;
+    public static double dampeningBand = 5;
+
+    private final DcMotorEx liftMotor;
     private final PIDController pid;
-    private final InterpLUT kGLookup;
     private final Telemetry telemetry;
 
     private double targetPos;
 
-    public LiftChallengeAnswerKey(HardwareMap hardwareMap, Telemetry telemetry) {
+    public LiftAnswerKeyDay2(HardwareMap hardwareMap, Telemetry telemetry) {
         liftMotor = hardwareMap.get(DcMotorEx.class, "lift");
         this.telemetry = telemetry;
 
         pid = new PIDController(kP, kI, kD);
-
-        // creating kG lookup table to account for varying string tension in lift
-        kGLookup = new InterpLUT();
-        for(int i = 0; i < kGLookupInput.length; i++)
-            kGLookup.add(kGLookupInput[i], kGLookupOutput[i]);
-        kGLookup.createLUT();
     }
 
     public void update() {
         int curPos = liftMotor.getCurrentPosition();
+        double error = targetPos - curPos;
+
         pid.setPID(kP, kI, kD);
 
+        double scaleFactor = 1;
+        if (Math.abs(error) < dampeningBand)
+            scaleFactor = Math.abs(error) / dampeningBand;
+
         /// NOTE: I am assuming that positive motor power = upwards motion
-        double lookupInput = Range.clip(curPos, kGLookupInput[0], kGLookupInput[kGLookupInput.length - 1]);
-        double gravityFeedforward = kGLookup.get(lookupInput);
         double frictionFeedforward = Math.signum(targetPos - curPos) * kS;
         double pidPower = pid.calculate(curPos, targetPos);
-        double totalPower = Range.clip(gravityFeedforward + frictionFeedforward + pidPower, -1, 1); // you don't have to clip this
+        double totalPower = kG + frictionFeedforward + pidPower;
+
+        totalPower *= scaleFactor;
+
         liftMotor.setPower(totalPower);
+        telemetry.addData("L power", totalPower);
+
 
 
         telemetry.addLine("LIFT-----");
         telemetry.addData("L target pos", targetPos);
         telemetry.addData("L current pos", curPos);
-        telemetry.addData("L power", totalPower);
     }
 
     public void setTargetPos(double target) {

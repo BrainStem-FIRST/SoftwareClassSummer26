@@ -1,0 +1,15 @@
+Day 1 Homework Overview
+
+Your homework is to write your own Turret subsystem from scratch
+
+If you feel lost, read the instructions file first. Then if you are still confused, feel free
+to ask us questions.
+- Turret: subsystems/day1Turret/TurretInstructions.txt
+
+There is a folder for the homework: day1Turret
+- TurretTemplate.java is an empty starting point if you want a skeleton to fill in
+- TurretAnswerKey.java is the answer key - only look at it after you've given the assignment
+  a real attempt, or if you're truly stuck
+
+When you are done: push your code to github and ensure that your repository visibility is set
+to Public. Then text us so we can review it.

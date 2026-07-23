@@ -1,0 +1,37 @@
+Class Requirements
+
+Add onto your Lift class from Day 2
+
+New Feature #1: Battery Independence
+- As the battery drains over a match, its voltage drops, which means the same motor power
+  produces less actual voltage/force than it did on a fresh battery
+- Instead of directly setting motor power from your feedforward + PID output, calculate the
+  TOTAL VOLTAGE you want to apply (kG + friction feedforward + PID output), then divide by
+  the current battery voltage to get the motor power
+- power = totalVoltage / batteryVoltage
+- This keeps your lift's behavior consistent no matter how drained the battery is
+
+Add a setBatteryVoltage function
+  - takes in 1 argument (double batteryVoltage)
+  - sets battery voltage instance data to argument
+
+New Feature #2: Dampening Band
+- Right near the target position, small amounts of PID/feedforward output can cause the lift
+  to jitter back and forth instead of settling
+- A dampening band scales down your total output when the lift is very close to its target,
+  so it settles smoothly instead of oscillating
+
+Add a dampeningBand variable on FTC dashboard representing how close (in encoder ticks) the
+lift needs to be to its target before dampening kicks in
+In your update function
+  - calculate the position error
+  - calculate a scale factor: the smaller of 1 and (absolute value of error) / dampeningBand
+    - this way, once you're within dampeningBand ticks of the target, the scale factor shrinks
+      toward 0 as you get closer; otherwise it's just 1 (no scaling)
+  - multiply your friction feedforward AND your PID output by this scale factor
+  - IMPORTANT: the dampening band is NOT applied to everything. Do NOT scale kG - gravity is
+    still pulling on the lift the same amount no matter how close you are to the target, so
+    kG is purposefully left out of the scaling
+
+LiftAnswerKeyDay3 is the answer key if you did not do the Day 2 kG lookup table challenge.
+You can still use it if you did the challenge because that part stays the same though

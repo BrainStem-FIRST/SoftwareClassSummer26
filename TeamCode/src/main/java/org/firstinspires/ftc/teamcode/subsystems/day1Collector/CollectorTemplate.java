@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.subsystems.collector;
+package org.firstinspires.ftc.teamcode.subsystems.day1Collector;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.HardwareMap;

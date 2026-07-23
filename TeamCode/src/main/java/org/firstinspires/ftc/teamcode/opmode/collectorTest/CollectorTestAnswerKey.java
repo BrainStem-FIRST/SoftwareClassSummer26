@@ -2,11 +2,10 @@ package org.firstinspires.ftc.teamcode.opmode.collectorTest;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.subsystems.collector.CollectorChallengeAnswerKey;
+import org.firstinspires.ftc.teamcode.subsystems.day1Collector.CollectorChallengeAnswerKey;
 
 //@Disabled // makes it so this doesn't show up in the driver station opMode dropdown
 @TeleOp(name="Collector Test", group="Answer Key")

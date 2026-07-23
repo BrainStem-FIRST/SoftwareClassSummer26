@@ -1,0 +1,38 @@
+Day 3 Homework Overview
+
+Parts 1 & 2: Lift and Arm
+- Modify your existing Arm and Lift classes from Day 2 homework to add battery independence
+  and a deadband/dampening band
+- These two parts have their own detailed instructions - don't look for them here
+  - Arm: subsystems/day3Arm/ArmInstructionsDay3.txt
+  - Lift: subsystems/day3Lift/LiftInstructionsDay3.txt
+
+Part 3: Day3BrainSTEMRobot
+Create a Day3BrainSTEMRobot class (see Day3BrainSTEMRobotAnswerKey.java for the answer key) that ties
+your Arm, Lift, and a pre-existing drivetrain class together into one robot object, and handles battery
+voltage for you so the individual subsystems don't have to know about it.
+
+Class Requirements:
+Instance data:
+- a BatteryVoltageFilter (private - no other class needs to touch this directly)
+- a MecanumDrive, called drive (public final)
+- your Lift class, called lift (public final)
+- your Arm class, called arm (public final)
+
+The Day3BrainSTEMRobot class should have a constructor taking in HardwareMap, Telemetry, and
+an initial Pose2d
+It should:
+- instantiate the BatteryVoltageFilter using hardwareMap
+- instantiate drive using hardwareMap and the initial pose
+- instantiate lift and arm using hardwareMap and telemetry
+
+It should have an update function (takes 0 parameters)
+- get the current battery voltage from the BatteryVoltageFilter
+- call setBatteryVoltage on both lift and arm, passing in that voltage
+  - IMPORTANT: you must do this BEFORE calling lift.update() and arm.update(). If you update
+    the subsystems first, they'll be using last loop's stale battery voltage instead of this
+    loop's
+- update your drive's localizer (drive.pinpoint().update())
+- call lift.update() and arm.update()
+
+GOOD VARIABLE NAMES ARE IMPORTANT

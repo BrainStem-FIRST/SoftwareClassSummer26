@@ -1,0 +1,37 @@
+Day 2 Homework Overview
+
+Control algorithm video (watch this if you feel uncomfortable about control systems/missed class today):
+https://www.youtube.com/watch?v=lBC1nEq0_nk
+
+
+Your homework is to write your own pivoting Arm subsystem AND vertical Lift subsystem from
+scratch. The goal of this is to practice writing control systems, just like how we did in
+class today.
+
+If you feel lost, try reading the instructions file we've provided for each assignment first.
+Then if you are still confused, feel free to ask us questions.
+If you are struggling with the arm gravity feedforward, do the short Khan Academy section below
+- Arm: subsystems/day2Arm/ArmInstructionsDay2.txt
+- Lift: subsystems/day2Lift/LiftInstructionsDay2.txt
+
+There are folders for the homework: day2Arm and day2Lift
+
+When you are done: push your code to github and ensure that your repository visibility is set
+to Public. Then, text us so we can review it.
+
+
+Khan Academy Trig Homework
+This part is for those who struggled with trigonometry when using the cosine function for arm gravity feedforward
+You are required to do a short segment in the khan academy trigonometry course.
+This includes a few articles, videos, practice problems, and a quiz (~1-2 hours of work).
+
+Link to Khan Academy trig course:
+https://www.khanacademy.org/math/trigonometry
+
+Instructions:
+1. Do the last part of Lesson 1 Ratios in right triangles. It is called Right triangles and
+   trigonometry FAQ.
+2. Do all of Lesson 2 Introduction to the trigonometric ratios
+3. Take the quiz
+4. Do all of Lesson 3 Solving for a side in a right triangle using the trigonometric ratios.
+5. Do all of Lesson 4 Solving for an angle in a right triangle using the trigonometric ratios
