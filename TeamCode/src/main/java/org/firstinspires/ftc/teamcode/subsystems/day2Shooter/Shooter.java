@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
-public class ShooterTemplate {
+public class Shooter {
     public static double kV = 0, kS = 0;
     public static double kP = 0, kI = 0, kD = 0;
 
@@ -24,7 +24,7 @@ public class ShooterTemplate {
     private double targetPower;
     private double targetVelocity;
 
-    public ShooterTemplate(HardwareMap hardwareMap, Telemetry telemetry) {
+    public Shooter(HardwareMap hardwareMap, Telemetry telemetry) {
         this.telemetry = telemetry;
         shooterMotor = hardwareMap.get(DcMotorEx.class, "shooter"); // the string name will vary based on your hardware map config
         pid = new PIDController(kP, kI, kD);

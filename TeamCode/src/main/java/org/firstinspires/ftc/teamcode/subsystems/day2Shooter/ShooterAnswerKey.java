@@ -4,7 +4,6 @@ import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -32,8 +31,7 @@ public class ShooterAnswerKey {
         setShooterState(ShooterState.OFF);
     }
 
-
-    public void update(double batteryVoltage) {
+    public void update() {
         double currentVelocity = shooterMotor.getVelocity();
         pid.setPID(kP, kI, kD);
 
@@ -45,8 +43,7 @@ public class ShooterAnswerKey {
                 shooterMotor.setPower(targetPower);
                 break;
             case VELOCITY_CONTROL:
-                double voltage = calculateVoltage(currentVelocity, targetVelocity);
-                shooterMotor.setPower(voltage / batteryVoltage);
+                shooterMotor.setPower(calculatePower(currentVelocity, targetVelocity));
                 break;
         }
 
@@ -57,12 +54,11 @@ public class ShooterAnswerKey {
         telemetry.addData("S motor power", shooterMotor.getPower());
     }
 
-    private double calculateVoltage(double currentVelocity, double targetVelocity) {
-        double feedforwardVoltage = targetVelocity * kV + Math.signum(targetVelocity) * kS;
-
-        double pidVoltage = pid.calculate(currentVelocity, targetVelocity);
-
-        return feedforwardVoltage + pidVoltage;
+    // TODO: use your equations to fill out this function below
+    private double calculatePower(double currentVelocity, double targetVelocity) {
+        double velocityPower = kV * targetVelocity;
+        double pidPower = pid.calculate(currentVelocity, targetVelocity);
+        return velocityPower + pidPower + kS;
     }
 
     public void setShooterState(ShooterState shooterState) {

@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-import org.firstinspires.ftc.teamcode.utils.batteryFilter.BatteryVoltageFilter;
+import org.firstinspires.ftc.teamcode.utils.misc.BatteryVoltageFilter;
 
 @Config
 @TeleOp(name = "Battery Voltage Test")
@@ -19,7 +19,7 @@ public class BatteryVoltageTest extends LinearOpMode {
         telemetry = new MultipleTelemetry(FtcDashboard.getInstance().getTelemetry(), telemetry);
         telemetry.setMsTransmissionInterval(30);
 
-        BatteryVoltageFilter batteryVoltageFilter = BatteryVoltageFilter.getInstance(hardwareMap);
+        BatteryVoltageFilter batteryVoltageFilter = new BatteryVoltageFilter(hardwareMap);
 
         DcMotorEx shooter = hardwareMap.get(DcMotorEx.class, "shooter");
 

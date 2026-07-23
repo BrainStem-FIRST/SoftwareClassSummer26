@@ -6,7 +6,7 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.subsystems.day2Shooter.ShooterTemplate;
+import org.firstinspires.ftc.teamcode.subsystems.day2Shooter.Shooter;
 
 @Config
 @TeleOp(name="Shooter Test")
@@ -19,18 +19,18 @@ public class ShooterTest extends LinearOpMode {
         telemetry = new MultipleTelemetry(FtcDashboard.getInstance().getTelemetry(), telemetry);
         telemetry.setMsTransmissionInterval(30);
 
-        ShooterTemplate shooter = new ShooterTemplate(hardwareMap, telemetry);
+        Shooter shooter = new Shooter(hardwareMap, telemetry);
 
         waitForStart();
 
         while(opModeIsActive()) {
 
             if(useTargetPower) {
-                shooter.setShooterState(ShooterTemplate.ShooterState.CONSTANT_POWER);
+                shooter.setShooterState(Shooter.ShooterState.CONSTANT_POWER);
                 shooter.setTargetPower(targetPower);
             }
             else {
-                shooter.setShooterState(ShooterTemplate.ShooterState.VELOCITY_CONTROL);
+                shooter.setShooterState(Shooter.ShooterState.VELOCITY_CONTROL);
                 shooter.setTargetVelocity(targetVelocity);
             }
 
