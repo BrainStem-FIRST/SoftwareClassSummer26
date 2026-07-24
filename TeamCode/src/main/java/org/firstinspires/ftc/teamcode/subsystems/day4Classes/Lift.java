@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.subsystems.day4Lift;
+package org.firstinspires.ftc.teamcode.subsystems.day4Classes;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.SubsystemBase;
@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
-public class LiftAnswerKeyDay4 extends SubsystemBase {
+public class Lift extends SubsystemBase {
     // when first coding subsystems, you can leave these tuning values 0
     // (just remember that you have to tune them later on)
     public static double kP = 0, kI = 0, kD = 0;
@@ -24,7 +24,7 @@ public class LiftAnswerKeyDay4 extends SubsystemBase {
     private double targetPos, curPos;
     private double batteryVoltage;
 
-    public LiftAnswerKeyDay4(HardwareMap hardwareMap, Telemetry telemetry) {
+    public Lift(HardwareMap hardwareMap, Telemetry telemetry) {
         liftMotor = hardwareMap.get(DcMotorEx.class, "lift");
         this.telemetry = telemetry;
 
