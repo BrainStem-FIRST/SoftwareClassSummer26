@@ -3,18 +3,24 @@ package org.firstinspires.ftc.teamcode.commands;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.arcrobotics.ftclib.command.Command;
+import com.arcrobotics.ftclib.command.ConditionalCommand;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.Subsystem;
+import com.arcrobotics.ftclib.command.WaitCommand;
 import com.arcrobotics.ftclib.command.WaitUntilCommand;
 import com.arcrobotics.ftclib.util.InterpLUT;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.subsystems.day2ColorSensor.ColorSensorWrapperAnswerKey;
+import org.firstinspires.ftc.teamcode.subsystems.day4Classes.Arm;
 import org.firstinspires.ftc.teamcode.subsystems.day4Classes.Collector;
+import org.firstinspires.ftc.teamcode.subsystems.day4Classes.Grabber;
 import org.firstinspires.ftc.teamcode.subsystems.day4Classes.Lift;
 import org.firstinspires.ftc.teamcode.subsystems.day4Classes.Shooter;
 import org.firstinspires.ftc.teamcode.subsystems.day4Classes.Turret;
 import org.firstinspires.ftc.teamcode.utils.command.CommandBuilder;
+import org.firstinspires.ftc.teamcode.utils.command.DeferredCommand;
 import org.firstinspires.ftc.teamcode.utils.drivetrain.PinpointLocalizer;
 
 import java.util.Set;
@@ -192,4 +198,44 @@ public class Day4CommandsListAnswerKey {
     when the lift is past 300 then rotate the arm
     when the lift reaches its destination, open the grabber
     */
+
+
+
+
+    // another example
+    public static Command grabBlock(Lift lift, Arm arm, Grabber grabber) {
+        return null;
+    }
+    public static Command depositBlockHigh(Lift lift, Arm arm, Grabber grabber) {
+        return null;
+    }
+    public static Command depositBlockBehind(Lift lift, Arm arm, Grabber grabber) {
+        return null;
+    }
+
+    // different ways to put it together
+    public static Command grabAndDepositBlock1(ColorSensorWrapperAnswerKey colorSensor, Lift lift, Arm arm, Grabber grabber) {
+        return new SequentialCommandGroup(
+                grabBlock(lift, arm, grabber),
+                new WaitCommand(500),
+                new DeferredCommand(
+                        () -> {
+                            if (colorSensor.seesColorInRange())
+                                return depositBlockHigh(lift, arm, grabber);
+                            return depositBlockBehind(lift, arm, grabber);
+                        }
+                )
+        );
+    }
+    public static Command grabAndDepositBlock2(ColorSensorWrapperAnswerKey colorSensor, Lift lift, Arm arm, Grabber grabber) {
+        return new SequentialCommandGroup(
+                grabBlock(lift, arm, grabber),
+                new WaitCommand(500),
+                new ConditionalCommand(
+                        depositBlockHigh(lift, arm, grabber),
+                        depositBlockBehind(lift, arm, grabber),
+                        () -> colorSensor.seesColorInRange()
+                )
+        );
+    }
 }
