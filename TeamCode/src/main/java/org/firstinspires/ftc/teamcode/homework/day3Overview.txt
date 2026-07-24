@@ -1,12 +1,12 @@
 Day 3 Homework Overview
 
+
 Parts 1 & 2: Lift and Arm
 - Modify your existing Arm and Lift classes from Day 2 homework to add battery independence
   and a deadband/dampening band
 - These two parts have their own detailed instructions - don't look for them here
   - Arm: subsystems/day3Arm/ArmInstructionsDay3.txt
   - Lift: subsystems/day3Lift/LiftInstructionsDay3.txt
-
 
 
 Part 3: Day3BrainSTEMRobot
@@ -39,7 +39,6 @@ It should have an update function (takes 0 parameters)
 - call lift.update() and arm.update()
 
 
-
 Part 4: CommandsList
 Create a CommandsList class. This class will hold public static methods that all return InstantCommands.
 You will be writing InstantCommands that set subsystem states/target positions (the simplest type of commands).
@@ -54,7 +53,7 @@ The list of functions you have to write is:
 - armToTargetAngle - sets the Arm's target angle to the angleRad argument
 - armTo90Degrees - sets the Arm's target angle to 90 degrees (converted to radians)
 
-See Day3CommandsListAnswerKey.java for the answer key
+See utils/command/Day3CommandsListAnswerKey.java for the answer key
 
 
 When you are done: push your code to github and ensure that your repository visibility is set

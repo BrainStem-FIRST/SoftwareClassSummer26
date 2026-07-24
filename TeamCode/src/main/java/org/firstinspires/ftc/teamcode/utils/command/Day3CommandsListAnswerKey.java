@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.homework;
+package org.firstinspires.ftc.teamcode.utils.command;
 
 import com.arcrobotics.ftclib.command.InstantCommand;
 
